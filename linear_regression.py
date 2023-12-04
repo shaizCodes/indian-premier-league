@@ -189,12 +189,12 @@ def plotPlayerPerformance(player='all', team='all', season='all'):
     plotter.show() 
 
 def doRegression():
-    # try:
-    printHeader("INDIAN PREMIER LEAGUE DATA")
-    season = chooseSeason()
-    team = chooseTeam(season)
-    player = choosePlayer(team, season)
-    print(f"Selected Player: {player} (Team: {team}) (Season: {season})")
-    plotPlayerPerformance(player, team, season)
-    # except Exception as error:
-    #     print(f"An error occured...ERROR: {error}")
+    try:
+        printHeader("INDIAN PREMIER LEAGUE DATA")
+        season = chooseSeason()
+        team = chooseTeam(season)
+        player = choosePlayer(team, season)
+        print(f"Selected Player: {player} (Team: {team}) (Season: {season})")
+        plotPlayerPerformance(player, team, season)
+    except Exception as error:
+        print(f"An error occured...ERROR: {error}")

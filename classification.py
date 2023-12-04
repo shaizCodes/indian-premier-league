@@ -57,10 +57,10 @@ for train_index, test_index in kf.split(X):
     if not 'overall_conf_matrix' in locals():
         overall_conf_matrix = np.zeros((num_classes_fold, num_classes_fold), dtype=int)
     overall_conf_matrix += fold_conf_matrix
-print('5-Fold Cross-validation results: {:.2f}%'.format(cross_val_results * 100))
-print('Mean accuracy: {:.2f}%'.format(cross_val_results.mean() * 100))
-print('Standard Deviation: {:.2f}%'.format(cross_val_results.std()))
-print("Confusion Matrix: {:.2f}%\n".format(overall_conf_matrix))
+print('5-Fold Cross-validation results: {}%'.format(cross_val_results * 100))
+print('Mean accuracy: {}%'.format(cross_val_results.mean() * 100))
+print('Standard Deviation: {:.2f}'.format(cross_val_results.std()))
+# print("Confusion Matrix: {}\n".format(overall_conf_matrix))
 
 
 kf = KFold(n_splits=10, shuffle=True, random_state=42)
@@ -77,14 +77,13 @@ for train_index, test_index in kf.split(X):
     if not 'overall_conf_matrix' in locals():
         overall_conf_matrix = np.zeros((num_classes_fold, num_classes_fold), dtype=int)
     overall_conf_matrix += fold_conf_matrix
-print('5-Fold Cross-validation results: {:.2f}%'.format(cross_val_results * 100))
-print('Mean accuracy: {:.2f}%'.format(cross_val_results.mean() * 100))
-print('Standard Deviation: {:.2f}%'.format(cross_val_results.std()))
-print("Confusion Matrix: {:.2f}%\n".format(overall_conf_matrix))
+print('5-Fold Cross-validation results: {}'.format(cross_val_results * 100))
+print('Mean accuracy: {}%'.format(cross_val_results.mean() * 100))
+print('Standard Deviation: {:.2f}'.format(cross_val_results.std()))
+# print("Confusion Matrix: {}\n".format(overall_conf_matrix))
 
-# Uncomment the following lines if you want to visualize the confusion matrix
-sns.heatmap(overall_conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=columns, yticklabels=columns)
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
+# sns.heatmap(overall_conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=columns, yticklabels=columns)
+# plt.title('Confusion Matrix')
+# plt.xlabel('Predicted')
+# plt.ylabel('Actual')
+# plt.show()
