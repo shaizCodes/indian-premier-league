@@ -1,0 +1,40 @@
+	ACCURACY EXPERIMENTS/REPORT:
+--------------------------------------------
+Best Results with these columns as features;
+
+[Team1, Team2, TossWinner, TossDecision, SuperOver, WonBy, Margin, method]:
+{82.53%, 83.37%}
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Results by droping these columns;
+
+[WinningTeam, ID, MatchNumber, Umpire1, Umpire2]
+{70.11%, 70.32%}
+
+[WinningTeam, ID, MatchNumber, Umpire1, Umpire2]
+{69.89%, 71.37%}
+
+[WinningTeam, ID, Umpire1, Umpire2]
+{69.37%, 69.47%}
+
+[WinningTeam, ID]:
+{69.79%, 69.37%}
+
+[WinningTeam, ID, Umpire2]
+{69.37%, 69.26%}
+
+[WinningTeam, ID, Umpire1]
+{70.11%, 67.16%}
+
+[WinningTeam, ID, Umpire1, Umpire2, TossDecision]
+{67.58%, 71.05%}
+
+[WinningTeam, ID, Team2Players]
+{69.47%, 68.42%}
+
+[WinningTeam]:
+{68.11%, 68.95%}
+
+[WinningTeam, ID, City]:
+{67.05%, 69.26%}
