@@ -51,7 +51,7 @@ def chooseSeason():
         menu += "(0). Select all Seasons\n"
         menu += "Choose Season[0 - "+str(count)+"]: "
         choice = int(input(menu))
-        if choice > -1 and choice < 16:
+        if choice > -1 and choice <= count:
             if choice == 0:
                 return 'all'
             return SEASONS[choice]
@@ -126,8 +126,8 @@ def updatePlayers(players, squads):
 def getPlayers(players, teams, matches):
     players = []
     times = 0
-    if not isinstance(team, str):
-        times = len(team)
+    if not isinstance(teams, str):
+        times = len(teams)
     time = 0
     while time<times:
         squads = matches[matches['Team1']==teams[time]]['Team1Players'].apply(ast.literal_eval)
@@ -139,22 +139,25 @@ def getPlayers(players, teams, matches):
 
 def plotPlayerPerformance(player='all', team='all', season='all'):
     matches = MATCHES
+    balls = BALLS
     if not season=='all':
         matches = matches[matches['Season']==season]
-    if not team=='all':
+    if team=='all':
+        balls = balls
+    else:
         if not isinstance(team, str):
             nTeams = len(team)
             dataFrames = []
             index = 0
             while index < nTeams:
-                dataFrames.append(matches[(matches['Team1']==team[index]) | (matches['Team2']==team[index])])
+                dataFrames.append(balls[(balls['BattingTeam']==team[index])])
                 index += 1
-            matches = pandas.concat(dataFrames, ignore_index=True)
+            balls = pandas.concat(dataFrames, ignore_index=True)
         else:
-            matches = matches[(matches['Team1']==team) | (matches['Team2']==team)]
-    balls = pandas.merge(matches, BALLS, on='ID')
+            balls = balls[balls['BattingTeam']==team]
     if not player=='all':
-        balls = pandas.merge(matches, BALLS[BALLS['batter']==player], on='ID')
+        balls = balls[balls['batter']==player]
+    balls = pandas.merge(matches, balls, on='ID')
     runs = {}
     runs['PER_BALL'] = balls.groupby(['ID', 'innings', 'overs', 'ballnumber'], as_index=True)['total_run'].aggregate('sum').to_list()
     runs['PER_INNING'] = balls.groupby(['ID', 'innings'], as_index=True)['total_run'].aggregate("sum").to_list()
@@ -185,12 +188,13 @@ def plotPlayerPerformance(player='all', team='all', season='all'):
     plotter.tight_layout()
     plotter.show() 
 
-try:
+def doRegression():
+    # try:
     printHeader("INDIAN PREMIER LEAGUE DATA")
     season = chooseSeason()
     team = chooseTeam(season)
     player = choosePlayer(team, season)
     print(f"Selected Player: {player} (Team: {team}) (Season: {season})")
     plotPlayerPerformance(player, team, season)
-except Exception as error:
-    print(f"An error occured...ERROR: {error}")
+    # except Exception as error:
+    #     print(f"An error occured...ERROR: {error}")
